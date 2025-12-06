@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Dangrek&family=Uchen&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  /* Custom color palette for neurodiversity app */
+  --calm-slate: #5E718B;
+  --calm-cream: #F0ECE6;
+  --warm-orange: #E2A55E;
+  --forest-green: #3A5A41;
+  --sage-green: #96AA9A;
+  --deep-black: #090909;
+  
+  /* Theme tokens using the custom palette */
+  --background: #F0ECE6;
+  --foreground: #090909;
+  --card: #ffffff;
+  --card-foreground: #090909;
+  --popover: #ffffff;
+  --popover-foreground: #090909;
+  --primary: #5E718B;
+  --primary-foreground: #F0ECE6;
+  --secondary: #96AA9A;
+  --secondary-foreground: #090909;
+  --muted: #96AA9A;
+  --muted-foreground: #3A5A41;
+  --accent: #E2A55E;
+  --accent-foreground: #090909;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(94, 113, 139, 0.2);
+  --input: transparent;
+  --input-background: #ffffff;
+  --switch-background: #96AA9A;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #5E718B;
+  --chart-1: #5E718B;
+  --chart-2: #E2A55E;
+  --chart-3: #3A5A41;
+  --chart-4: #96AA9A;
+  --chart-5: #F0ECE6;
+  --radius: 0.625rem;
+  --sidebar: #F0ECE6;
+  --sidebar-foreground: #090909;
+  --sidebar-primary: #5E718B;
+  --sidebar-primary-foreground: #F0ECE6;
+  --sidebar-accent: #96AA9A;
+  --sidebar-accent-foreground: #090909;
+  --sidebar-border: rgba(94, 113, 139, 0.2);
+  --sidebar-ring: #5E718B;
+}
+
+.dark {
+  --background: #090909;
+  --foreground: #F0ECE6;
+  --card: #1a1a1a;
+  --card-foreground: #F0ECE6;
+  --popover: #1a1a1a;
+  --popover-foreground: #F0ECE6;
+  --primary: #96AA9A;
+  --primary-foreground: #090909;
+  --secondary: #3A5A41;
+  --secondary-foreground: #F0ECE6;
+  --muted: #3A5A41;
+  --muted-foreground: #96AA9A;
+  --accent: #E2A55E;
+  --accent-foreground: #090909;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(150, 170, 154, 0.3);
+  --input: rgba(150, 170, 154, 0.3);
+  --ring: #96AA9A;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: #96AA9A;
+  --chart-2: #E2A55E;
+  --chart-3: #5E718B;
+  --chart-4: #3A5A41;
+  --chart-5: #F0ECE6;
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #F0ECE6;
+  --sidebar-primary: #96AA9A;
+  --sidebar-primary-foreground: #090909;
+  --sidebar-accent: #3A5A41;
+  --sidebar-accent-foreground: #F0ECE6;
+  --sidebar-border: rgba(150, 170, 154, 0.3);
+  --sidebar-ring: #96AA9A;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-calm-slate: #5E718B;
+  --color-calm-cream: #F0ECE6;
+  --color-warm-orange: #E2A55E;
+  --color-forest-green: #3A5A41;
+  --color-sage-green: #96AA9A;
+  --color-deep-black: #090909;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Uchen', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+  }
+  
+  /* Canvas texture overlay for body */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+  }
+  
+  /* Ensure content appears above texture */
+  body > * {
+    position: relative;
+    z-index: 2;
+  }
+  
+  h1, h2, h3, h4, h5, h6, button, label {
+    font-family: 'Dangrek', sans-serif;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Canvas texture utility class for cards and sections */
+.canvas-texture {
+  position: relative;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+}
+
+/* Paint stroke texture for buttons and interactive elements */
+.paint-texture {
+  position: relative;
+  overflow: hidden;
+}
+
+.paint-texture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0.15;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paintNoise'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.5' numOctaves='2' seed='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paintNoise)' fill='white'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  mix-blend-mode: soft-light;
+}
+
+/* Soft paper texture for white cards */
+.paper-texture {
+  background-image: 
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' /%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.025'/%3E%3C/svg%3E");
+  background-size: 100px 100px, 100px 100px, 180px 180px;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+  --background: #ffffff;
+  --foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #000000;
+  --secondary-foreground: #ffffff;
+  --accent: #000000;
+  --accent-foreground: #ffffff;
+}
+
+.high-contrast body::before {
+  display: none;
+}
+
+.high-contrast * {
+  border-color: #000000 !important;
+}
+
+.high-contrast button,
+.high-contrast a {
+  border: 2px solid #000000 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Animation for emotion selector */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
