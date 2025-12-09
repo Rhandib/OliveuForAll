@@ -119,7 +119,7 @@ export default function ParentInterface({ notes, addNote, medications, contacts,
         </div>
 
         {/* At a Glance - Medication Reminders */}
-        <section className="bg-white rounded-3xl shadow-lg p-8 space-y-6 paper-texture" aria-label="Medication reminders at a glance">
+        <section className="bg-white rounded-3xl shadow-lg p-8 space-y-6 paper-texture paper-card" aria-label="Medication reminders at a glance">
           <div className="flex items-center justify-between">
             <h2 className="text-calm-slate">At a Glance</h2>
             <Calendar className="w-6 h-6 text-calm-slate" aria-hidden="true" />
@@ -380,7 +380,7 @@ export default function ParentInterface({ notes, addNote, medications, contacts,
         </section>
 
         {/* Shared Notes Preview */}
-        <section className="bg-white rounded-3xl shadow-lg p-8 space-y-4 paper-texture" aria-label="Recent shared notes">
+        <section className="bg-white rounded-3xl shadow-lg p-8 space-y-4 paper-texture paper-card" aria-label="Recent shared notes">
           <div className="flex items-center justify-between">
             <h3 className="text-calm-slate">Recent Notes</h3>
             <button
@@ -477,7 +477,7 @@ function QuickActionCard({ icon, label, description, onClick, color }: QuickActi
   return (
     <button
       onClick={onClick}
-      className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-warm-orange/50 active:scale-[0.98] flex flex-col items-center gap-4 min-h-[180px] paper-texture"
+      className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-warm-orange/50 active:scale-[0.98] flex flex-col items-center gap-4 min-h-[180px] paper-texture paper-card"
       aria-label={`${label}: ${description}`}
     >
       <div className="p-4 rounded-2xl paint-texture" style={{ backgroundColor: color + '20', color: color }}>

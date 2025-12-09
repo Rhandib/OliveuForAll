@@ -48,6 +48,30 @@ export default function ChildInterface({ notes, addNote, childProgress, logEmoti
     return Math.max(0, childProgress.dailyTimeLimit - childProgress.totalTimeToday);
   };
 
+  const getEmotionVideoEffect = (emotion: string) => {
+    const effectMap: { [key: string]: string } = {
+      'Happy': 'hue-rotate(30deg) brightness(1.15) saturate(1.3)',
+      'Sad': 'hue-rotate(200deg) brightness(0.85) saturate(0.8) contrast(0.9)',
+      'Angry': 'hue-rotate(350deg) brightness(1.1) saturate(1.5) contrast(1.2)',
+      'Worried': 'hue-rotate(40deg) brightness(1.05) saturate(0.7) contrast(0.95)',
+      'Tired': 'hue-rotate(180deg) brightness(0.75) saturate(0.6) contrast(0.85)',
+      'Excited': 'hue-rotate(320deg) brightness(1.2) saturate(1.6) contrast(1.15)'
+    };
+    return effectMap[emotion] || 'none';
+  };
+
+  const getEmotionShadowColor = (emotion: string) => {
+    const feeling = feelings.find(f => f.label === emotion);
+    if (!feeling) return 'rgba(150, 170, 154, 0.6)';
+    
+    // Convert hex to rgba for shadow
+    const hex = feeling.color.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, 0.6)`;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-sage-green/10 to-calm-cream relative pb-24 canvas-texture">
       {/* Top Navigation Bar */}
@@ -55,7 +79,7 @@ export default function ChildInterface({ notes, addNote, childProgress, logEmoti
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <button 
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-calm-cream hover:text-warm-orange transition-colors min-w-[48px] min-h-[48px] -ml-2 pl-2 focus:outline-none focus:ring-2 focus:ring-warm-orange rounded-lg"
+            className="flex items-center gap-2 text-calm-cream hover:text-warm-orange transition-colors min-w-[48px] min-h-[48px] -ml-2 pl-2 pr-4 focus:outline-none focus:ring-2 focus:ring-warm-orange rounded-lg shadow-none border-0"
             aria-label="Go back to home"
           >
             <Home className="w-6 h-6" />
@@ -65,7 +89,7 @@ export default function ChildInterface({ notes, addNote, childProgress, logEmoti
           {/* Time Limit Indicator */}
           <button
             onClick={() => speak(`${getTimeRemaining()} minutes remaining today`)}
-            className="flex items-center gap-2 bg-calm-cream/10 px-3 py-2 rounded-full hover:bg-calm-cream/20 transition-colors min-h-[48px] focus:outline-none focus:ring-2 focus:ring-warm-orange"
+            className="hidden"
             aria-label={`${getTimeRemaining()} minutes remaining today`}
             style={{ color: getTimeColor() }}
           >
@@ -83,7 +107,7 @@ export default function ChildInterface({ notes, addNote, childProgress, logEmoti
         </div>
 
         {/* Feelings Check-in Section */}
-        <section className="bg-white rounded-3xl shadow-lg p-8 space-y-6 paper-texture" aria-label="Feelings Check-in">
+        <section className="bg-white rounded-3xl shadow-lg p-8 space-y-6 paper-texture paper-card" aria-label="Feelings Check-in">
           <h2 className="text-center text-calm-slate">How are you feeling today?</h2>
           
           {/* Large Featured Emotion Display */}
@@ -91,24 +115,79 @@ export default function ChildInterface({ notes, addNote, childProgress, logEmoti
             <div className="relative">
               {selectedFeeling ? (
                 <div className="flex flex-col items-center animate-fade-in">
-                  <video 
-                    autoPlay 
-                    loop 
-                    playsInline
-                    muted
-                    className="w-48 h-48 object-cover rounded-full shadow-2xl mb-4"
+                  <div 
+                    className="w-48 h-48 rounded-full shadow-2xl mb-4 flex items-center justify-center"
                     style={{
-                      filter: 'drop-shadow(0 0 20px rgba(150, 170, 154, 0.6))',
+                      filter: `drop-shadow(0 0 20px ${getEmotionShadowColor(selectedFeeling)})`,
                     }}
                   >
-                    <source src="/_videos/v1/ae3d6cbb22295eef81256feff4cc46e140693165" />
-                  </video>
+                    <svg width="192" height="192" viewBox="0 0 100 100" style={{ filter: getEmotionVideoEffect(selectedFeeling) }}>
+                      <defs>
+                        <radialGradient id={`grad-large-${selectedFeeling}`} cx="50%" cy="50%">
+                          <stop offset="0%" stopColor={feelings.find(f => f.label === selectedFeeling)?.color || '#96AA9A'} stopOpacity="0.9" />
+                          <stop offset="100%" stopColor={feelings.find(f => f.label === selectedFeeling)?.color || '#96AA9A'} stopOpacity="0.6" />
+                        </radialGradient>
+                      </defs>
+                      
+                      {/* Circle */}
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill={`url(#grad-large-${selectedFeeling})`}
+                      />
+                      
+                      {/* Face based on emotion */}
+                      {selectedFeeling === 'Happy' && (
+                        <g>
+                          <path d="M 32 40 Q 35 35 38 40" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                          <path d="M 62 40 Q 65 35 68 40" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                          <path d="M 35 58 Q 50 70 65 58" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                        </g>
+                      )}
+                      {selectedFeeling === 'Sad' && (
+                        <g>
+                          <path d="M 32 42 Q 35 38 38 42" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                          <path d="M 62 42 Q 65 38 68 42" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                          <path d="M 35 68 Q 50 60 65 68" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                        </g>
+                      )}
+                      {selectedFeeling === 'Angry' && (
+                        <g>
+                          <path d="M 30 38 L 40 44" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                          <path d="M 70 38 L 60 44" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                          <path d="M 35 65 L 65 65" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                        </g>
+                      )}
+                      {selectedFeeling === 'Worried' && (
+                        <g>
+                          <circle cx="35" cy="42" r="3" fill="#484848" />
+                          <circle cx="65" cy="42" r="3" fill="#484848" />
+                          <path d="M 38 65 Q 50 63 62 65" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                        </g>
+                      )}
+                      {selectedFeeling === 'Tired' && (
+                        <g>
+                          <path d="M 32 42 L 38 42" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                          <path d="M 62 42 L 68 42" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                          <path d="M 40 62 Q 50 64 60 62" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                        </g>
+                      )}
+                      {selectedFeeling === 'Excited' && (
+                        <g>
+                          <circle cx="35" cy="40" r="4" fill="#484848" />
+                          <circle cx="65" cy="40" r="4" fill="#484848" />
+                          <path d="M 32 55 Q 50 75 68 55" stroke="#484848" strokeWidth="3" fill="none" strokeLinecap="round" />
+                        </g>
+                      )}
+                    </svg>
+                  </div>
                   <div 
                     className="px-8 py-3 rounded-full shadow-lg"
                     style={{ backgroundColor: feelings.find(f => f.label === selectedFeeling)?.color || '#96AA9A' }}
                   >
                     <p className="text-2xl text-white">
-                      {feelings.find(f => f.label === selectedFeeling)?.emoji} {selectedFeeling}
+                      {selectedFeeling}
                     </p>
                   </div>
                 </div>

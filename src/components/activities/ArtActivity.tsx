@@ -217,7 +217,7 @@ export default function ArtActivity({ navigate }: Props) {
       <div className="bg-calm-slate text-calm-cream p-4 flex items-center justify-between shadow-md paint-texture">
         <button 
           onClick={() => navigate('/child')} 
-          className="flex items-center gap-2 hover:text-warm-orange transition-colors min-h-[48px] -ml-2 pl-2 focus:outline-none focus:ring-2 focus:ring-warm-orange rounded-lg"
+          className="flex items-center gap-2 hover:text-warm-orange transition-colors min-h-[48px] -ml-2 pl-2 pr-4 focus:outline-none focus:ring-2 focus:ring-warm-orange rounded-lg"
           aria-label="Go back to activities"
         >
           <ArrowLeft className="w-5 h-5" />

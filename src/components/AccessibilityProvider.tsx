@@ -57,7 +57,7 @@ function AccessibilityControls() {
     <div className="fixed top-4 right-4 z-50 flex gap-2">
       <button
         onClick={() => setTtsEnabled(!ttsEnabled)}
-        className="bg-[#7CBEA1] hover:bg-[#6BAD90] p-3 rounded-full shadow-lg transition-colors"
+        className="bg-[rgb(150,170,154)] hover:bg-[#6BAD90] p-3 rounded-full shadow-lg transition-colors"
         aria-label={ttsEnabled ? 'Disable text to speech' : 'Enable text to speech'}
       >
         {ttsEnabled ? <Volume2 className="w-5 h-5 text-white" /> : <VolumeX className="w-5 h-5 text-white" />}
@@ -66,7 +66,7 @@ function AccessibilityControls() {
       <select
         value={language}
         onChange={(e) => setLanguage(e.target.value)}
-        className="bg-[#7CBEA1] text-white px-3 py-2 rounded-full shadow-lg cursor-pointer"
+        className="bg-[#96AA9A] text-white px-3 py-2 rounded-full shadow-lg cursor-pointer"
         aria-label="Select language"
       >
         <option value="en">EN</option>
@@ -77,7 +77,7 @@ function AccessibilityControls() {
 
       <button
         onClick={() => setHighContrast(!highContrast)}
-        className="bg-[#7CBEA1] hover:bg-[#6BAD90] px-4 py-2 rounded-full shadow-lg text-white transition-colors"
+        className="bg-[#96AA9A] hover:bg-[#6BAD90] px-4 py-2 rounded-full shadow-lg text-white transition-colors"
         aria-label={highContrast ? 'Disable high contrast' : 'Enable high contrast'}
       >
         {highContrast ? 'HC OFF' : 'HC ON'}

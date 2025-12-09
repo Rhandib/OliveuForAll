@@ -23,7 +23,8 @@ interface Props {
 
 function Logo() {
   return (
-      <div className="w-32 h-32 mx-auto">
+    <div className="mb-8">
+      <div className="w-[250px] h-[250px] mx-auto">
         <svg className="block size-full" fill="none" preserveAspectRatio="xMidYMid meet" viewBox="0 0 110 41" xmlnsXlink="http://www.w3.org/1999/xlink">
           <g id="logo">
             <g filter="url(#filter0_dn_3_105)" id="Vector 4">
@@ -212,7 +213,8 @@ function Logo() {
           </defs>
         </svg>
       </div>
-    );
+    </div>
+  );
 }
 
 export default function StartScreen({ navigate }: Props) {
@@ -234,14 +236,8 @@ export default function StartScreen({ navigate }: Props) {
             <h1 className="text-calm-slate">
               Emotional Regulation
             </h1>
-            <p className="text-forest-green opacity-80">For Kids</p>
+            <p className="text-forest-green opacity-80 font-[Dekko]">For All</p>
           </div>
-        </div>
-
-        {/* Tagline */}
-        <div className="text-center space-y-1 px-4">
-          <p className="text-forest-green/70">Learn skills,</p>
-          <p className="text-forest-green/70">enhance overall well-being.</p>
         </div>
         
         {/* Action Buttons - Large Touch Targets */}
